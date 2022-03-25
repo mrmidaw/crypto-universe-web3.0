@@ -9,11 +9,11 @@ With a stunning design, connected to the blockchain, metamask pairing, interacti
 - React 
 - CRA template TS init with Vite.dev
 - Tailwind CSS
-- React Hooks 
-- Router v6
+- React Hooks
 - Axios 
+- React Icons
 - ESLint 
-
+- Ethers
 ## Requirements
 
 First, you should install dependencies using 
