@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 import { Footer } from './components/Footer';
 import { Loader } from './components/Loader';
 import { Navbar } from './components/Navbar';
-import { Services } from './components/Services';
-import { Transactions } from './components/Transactions';
-import { Welcome } from './components/Welcome';
+import { Services } from './pages/Services';
+import { Transactions } from './pages/Transactions';
+import { Welcome } from './pages/Welcome';
 
 const App: FC = () => {
   return (
