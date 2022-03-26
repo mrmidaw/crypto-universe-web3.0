@@ -14,11 +14,15 @@ export const Welcome: FC = () => {
         return null;
     };
 
+    const handleSubmit = () => {
+        return null;
+    };
+
 
     return (
         <div className='flex w-full justify-center items-center'>
-            <div className='flex md:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
-                <div className='flex flex-1 justify-start flex-col md:mr-10'>
+            <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
+                <div className='flex flex-1 justify-start flex-col mf:mr-10'>
                     <h1 className='text-3xl sm:text-5xl text-white text-gradient py-1 '>
                         Send Crypto <br /> across the world
                     </h1>
@@ -43,11 +47,11 @@ export const Welcome: FC = () => {
                             Security
                         </div>
 
-                        <div className={`rounded-tr-2xl ${commonStyles}`}>
+                        <div className={`sm:rounded-tr-2xl ${commonStyles}`}>
                             Ethereum
                         </div>
 
-                        <div className={`rounded-bl-2xl ${commonStyles}`}>
+                        <div className={`sm:rounded-bl-2xl ${commonStyles}`}>
                             Web 3.0
                         </div>
 
@@ -61,40 +65,46 @@ export const Welcome: FC = () => {
                     </div>
                 </div>
 
-                <div className='flex flex-col flex-1 items-center justify-start w-full md:mt-0 mt-10'>
+                <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
                     <div className='p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card white-glassmorphism'>
                         <div className='flex justify-between flex-col w-full h-full'>
                             <div className='flex justify-between item-start'>
                                 <div className='w-10 h-10 rounded-full border-2 border-white flex justify-center items-center'>
-                                    <SiEthereum fontSize={22} color='#fff'/>
+                                    <SiEthereum fontSize={22} color='#fff' />
                                 </div>
-                                <BsInfoCircle fontSize={18} color='#fff'/>
+                                <BsInfoCircle fontSize={18} color='#fff' />
                             </div>
                             <div className=''>
                                 <p className='text-white font-light text-sm'>
-                                0xBD34debc......6990377Cf2
+                                    0xBD34debc......6990377Cf2
                                 </p>
                                 <p className='text-white font-semibold text-lg mt-1'>
-                                Ethereum 
+                                    Ethereum
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism'>
-                        <InputForm placeholder='Address To' name='addressTo' type='text' value={'0xBD34debc796F5337cEfAF24e3021AF6990377Cf2'} handleChange={() => {}} />
-                        <InputForm placeholder='Amount (ETH)' name='amount' type='number' handleChange={() => {}} />
-                        <InputForm placeholder='Keyword (reward)' name='keyword' type='text' handleChange={() => {}} />
-                        <InputForm placeholder='Enter Message' name='message' type='text' handleChange={() => {}} />
+                        <InputForm placeholder='Address To' name='addressTo' type='text' value={'0xBD34debc796F5337cEfAF24e3021AF6990377Cf2'} handleChange={() => { }} />
+                        <InputForm placeholder='Amount (ETH)' name='amount' type='number' handleChange={() => { }} />
+                        <InputForm placeholder='Keyword (reward)' name='keyword' type='text' handleChange={() => { }} />
+                        <InputForm placeholder='Enter Message' name='message' type='text' handleChange={() => { }} />
 
-                        <div className='h-[1px] w-full bg-gray-400 my-2'/>
+                        <div className='h-[1px] w-full bg-gray-400 my-2' />
 
-                        {/* {isLoading && (
-
-                        ) : ()} */}
+                        {false ? (
+                            <Loader />
+                        ) : (
+                            <div>
+                                <button className="text-white w-72 mt-2 border-[1px] p-2 border-[#3d4f7c] 
+                                hover:bg-[#3d4f7c] rounded-full cursor-pointer" type='button' onClick={handleSubmit}>
+                                    Send Now
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
-
             </div>
         </div>
     );
