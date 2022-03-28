@@ -11,18 +11,25 @@ const { ethereum } = window;
 const getEthereumContract = () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
-    const transactionContract = new ethereum.contract(contractAddress, contractAbi, signer);
+    const transactionsContract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-    console.log({
-        provider,
-        signer,
-        transactionContract
-    });
+    return transactionsContract;
 };
 
 // eslint-disable-next-line react/prop-types
-export const TransactionProvider = ({ children }: any) => {
+export const TransactionProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState('');
+
+    const [formData, setFormData] = useState({
+        addressTo: '',
+        amount: '',
+        keyword: '',
+        message: ''
+    });
+
+    const handleChange = (e, name) => {
+        setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
+    };
 
     const checkIfWalletIsConnected = async () => {
         try {
@@ -38,7 +45,7 @@ export const TransactionProvider = ({ children }: any) => {
             } else {
                 console.log('No accounts found');
             }
-        } catch (error: any) {
+        } catch (error) {
             toast.error(`Error: ${error.message}`);
         }
 
@@ -47,12 +54,37 @@ export const TransactionProvider = ({ children }: any) => {
     const connectWallet = async () => {
         try {
             if (!ethereum) {
-                return alert("Please install Metamask");
+                return toast.error("Please install Metamask");
             }
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             setCurrentAccount(accounts[0]);
             toast.success('Wow so easy!');
-        } catch (error: any) {
+        } catch (error) {
+            toast.error(`Error: ${error.message}`);
+        }
+    };
+
+    const sendTransaction = async () => {
+        try {
+            if (!ethereum) {
+                return toast.error("Please install Metamask");
+            }
+
+            const { addressTo, amount, keyword, message } = formData;
+
+            const transactionContract = getEthereumContract();
+
+
+            await ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [{
+                    from: currentAccount,
+                    to: addressTo,
+                    gas: '0x5208'
+                }]
+            });
+
+        } catch (error) {
             toast.error(`Error: ${error.message}`);
         }
     };
@@ -64,7 +96,9 @@ export const TransactionProvider = ({ children }: any) => {
     console.log('currentAccount>>>', currentAccount);
 
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount }}>
+        <TransactionContext.Provider
+            value={{ connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction }}
+        >
             {children}
         </TransactionContext.Provider>
     );
