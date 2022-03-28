@@ -12,8 +12,10 @@ With a stunning design, connected to the blockchain, metamask pairing, interacti
 - React Hooks
 - Axios 
 - React Icons
+- Toastify
 - ESLint 
 - Ethers
+- HardHat
 ## Requirements
 
 First, you should install dependencies using 

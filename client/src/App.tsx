@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Footer } from './components/Footer';
 import { Loader } from './components/Loader';
@@ -11,6 +13,7 @@ const App: FC = () => {
   return (
     <div className='min-h-screen'>
       <div className='gradient-bg-welcome'>
+        <ToastContainer />
         <Navbar />
         <Welcome />
       </div>
