@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import { Footer } from './components/Footer';
-import { Loader } from './components/Loader';
+// import { Loader } from './components/Loader';
 import { Navbar } from './components/Navbar';
 import { Services } from './pages/Services';
 import { Transactions } from './pages/Transactions';

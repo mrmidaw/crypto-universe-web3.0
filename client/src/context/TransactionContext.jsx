@@ -19,6 +19,8 @@ const getEthereumContract = () => {
 // eslint-disable-next-line react/prop-types
 export const TransactionProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactionCount'));
 
     const [formData, setFormData] = useState({
         addressTo: '',
@@ -73,16 +75,30 @@ export const TransactionProvider = ({ children }) => {
             const { addressTo, amount, keyword, message } = formData;
 
             const transactionContract = getEthereumContract();
-
+            const parseAmount = ethers.utils.parseEther(amount);
 
             await ethereum.request({
                 method: 'eth_sendTransaction',
                 params: [{
                     from: currentAccount,
                     to: addressTo,
-                    gas: '0x5208'
+                    gas: '0x5208', // 21000 GWEI
+                    value: parseAmount._hex
                 }]
             });
+
+            const transactionHash = await transactionContract.addToBlockchain(addressTo, parseAmount, message, keyword);
+
+            setIsLoading(true);
+            console.log(`Loading ${transactionHash.hash}`);
+            await transactionHash.wait();
+
+            setIsLoading(false);
+            console.log(`Success ${transactionHash.hash}`);
+
+            const transactionCount = await transactionContract.getTransactionCount();
+
+            setTransactionCount(transactionCount.toNumber());
 
         } catch (error) {
             toast.error(`Error: ${error.message}`);
