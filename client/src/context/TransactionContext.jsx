@@ -109,8 +109,6 @@ export const TransactionProvider = ({ children }) => {
         checkIfWalletIsConnected();
     }, []);
 
-    console.log('currentAccount>>>', currentAccount);
-
     return (
         <TransactionContext.Provider
             value={{ connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction }}

@@ -1,10 +1,12 @@
 import React, { FC, useContext } from 'react';
+
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle } from 'react-icons/bs';
 
 import { Loader } from '../components/Loader';
 import { InputForm } from '../components/InputForm';
+
 import { TransactionContext } from "../context/TransactionContext";
 
 
@@ -14,7 +16,7 @@ export const Welcome: FC = () => {
 
     const { connectWallet, currentAccount, formData, handleChange, sendTransaction }: any = useContext(TransactionContext);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const { addressTo, amount, keyword, message } = formData;
         e.preventDefault();
 
@@ -26,6 +28,10 @@ export const Welcome: FC = () => {
 
     };
 
+    // Short eth address
+    const shortenAddress = (address: string) => {
+        return `${address.slice(0, 5)}.........${address.slice(address.length - 4)}`;
+    };
 
     return (
         <div className='flex w-full justify-center items-center'>
@@ -86,7 +92,7 @@ export const Welcome: FC = () => {
                             </div>
                             <div className=''>
                                 <p className='text-white font-light text-sm'>
-                                    0xBD34debc......6990377Cf2
+                                    {shortenAddress(currentAccount)}
                                 </p>
                                 <p className='text-white font-semibold text-lg mt-1'>
                                     Ethereum
