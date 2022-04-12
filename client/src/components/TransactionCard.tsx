@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import { useFetch } from '../hooks/useFetch';
 
 interface ITransaction {
-    id: number;
-    url: string;
+    addressFrom: string;
+    addressTo: string;
+    amount: number;
+    keyword: string;
     message: string;
     timestamp: Date;
-    addressFrom: string;
-    amount: string;
-    addressTo: string;
+
 }
 
 interface IProps {
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export const TransactionCard: FC<IProps> = ({ transaction }) => {
-    const gifUrl = useFetch(transaction.message);
+    const gifUrl = useFetch(transaction.keyword);
 
     // Short eth address
     const shortenAddress = (address: string) => {
@@ -51,7 +51,7 @@ export const TransactionCard: FC<IProps> = ({ transaction }) => {
                 </div>
 
                 <img
-                    src={gifUrl || transaction.url}
+                    src={gifUrl}
                     alt='gif'
                     className='w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover'
                 />

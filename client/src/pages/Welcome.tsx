@@ -14,7 +14,7 @@ const commonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-ce
 
 export const Welcome: FC = () => {
 
-    const { connectWallet, currentAccount, formData, handleChange, sendTransaction }: any = useContext(TransactionContext);
+    const { connectWallet, currentAccount, formData, handleChange, sendTransaction, isLoading }: any = useContext(TransactionContext);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const { addressTo, amount, keyword, message } = formData;
@@ -111,7 +111,7 @@ export const Welcome: FC = () => {
 
                         <div className='h-[1px] w-full bg-gray-400 my-2' />
 
-                        {false ? (
+                        {isLoading ? (
                             <Loader />
                         ) : (
                             <div>
